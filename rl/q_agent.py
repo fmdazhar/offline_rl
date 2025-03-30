@@ -19,8 +19,8 @@ from rl.critic import MultiFcQ, MultiFcQConfig
 @dataclass
 class QAgentConfig:
     device: str = "cpu"
-    lr: float = 1e-4
-    critic_target_tau: float = 0.01
+    lr: float = 3e-4
+    critic_target_tau: float = 0.005
     stddev_clip: float = 0.3
     # encoder
     use_prop: int = 0

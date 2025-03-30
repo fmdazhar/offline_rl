@@ -149,7 +149,7 @@ class Workspace:
 
     def _setup_env(self):
         # Create the environment with rendering enabled
-        self.train_env = create_env(render_mode="human")
+        self.train_env = create_env()
         self.eval_env = create_env()
 
     def _setup_replay(self):

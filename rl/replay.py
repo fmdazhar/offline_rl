@@ -228,11 +228,16 @@ def add_demos_to_replay(
         rewards_array = traj["rewards"]         # shape (T,)
         dones_array = traj["dones"]             # shape (T,) (bool)
 
+
         # Typically, T = number of steps in the trajectory
         T = len(rewards_array)
-        # Compute total return once per trajectory
-        total_return = float(rewards_array.sum())
 
+        if is_demo:
+            assert rewards_array[-1] == 1
+            terminals = rewards_array
+        else:
+            terminals = rewards_array[:]
+            terminals[-1] = 1
         # We'll do 1 extra iteration so that at t=0 we can call new_episode(...)
         # and at t>0 we process the t-1 action and reward.
         for t in range(T + 1):
@@ -256,15 +261,15 @@ def add_demos_to_replay(
 
             # If these are demonstration episodes that only end when
             # the task is successful, you might define success as:
-
-            success = bool(is_demo and done and (total_return > 8000))
+            success = bool(rewards_array[t - 1] == 1)
+            terminal = bool(terminals[t - 1])
 
             # Add transition
             replay.add(
                 obs=current_obs,
                 reply=action_dict,
                 reward=r,
-                terminal=done,
+                terminal=terminal,
                 success=success,
             )
 

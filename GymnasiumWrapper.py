@@ -47,7 +47,7 @@ def create_env(render_mode="rgb_array", env_name="Humanoid-v5", max_episode_step
     env = FlattenObservation(env)
     env = StateDictWrapper(env)
     env = ToTensorWrapper(env)
-    env = SuccessWrapper(env, success_threshold=8000)
+    env = SuccessWrapper(env, success_threshold=5000)
     env.observation_shape = env.observation_space["state"].shape
 
     return env

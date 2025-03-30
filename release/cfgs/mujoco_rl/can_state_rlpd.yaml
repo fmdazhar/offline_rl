@@ -9,7 +9,7 @@ preload_num_data: 10
 preload_datapath: "release/data/mujoco/humanoid-expert-v5.pkl"
 num_warm_up_episode: 40
 num_train_step: 200000
-replay_buffer_size: 1000
+replay_buffer_size: 50000
 use_wb: 1
 mp_eval: 1
 log_per_step: 2000
