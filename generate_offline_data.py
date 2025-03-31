@@ -15,6 +15,8 @@ import warnings
 import gymnasium as gym
 import pickle
 from tqdm import trange
+import os
+
 
 
 
@@ -201,9 +203,9 @@ if __name__ == "__main__":
     avg_return /= len(trajectories)
     print(f"Average Return: {avg_return}")
 
-    import os
-    fname = "./checkpoints/gym/humanoid-expert-v5.pkl"
-    os.makedirs(os.path.dirname(fname), exist_ok=True)
-    fname = "./checkpoints/gym/humanoid-expert-v5.pkl"
-    with open(fname, "wb") as fp:
+
+    # Save under the "data" folder in the "release" directory
+    save_path = os.path.join("release", "data", "humanoid-expert-v5.pkl")
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+    with open(save_path, "wb") as fp:
         pickle.dump(trajectories, fp, protocol=pickle.HIGHEST_PROTOCOL)

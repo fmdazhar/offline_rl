@@ -10,6 +10,8 @@ import yaml
 from  GymnasiumWrapper import create_env
 import common_utils
 import wandb
+from evaluate import run_eval_gym
+
 
 @dataclass
 class DatasetConfig:
